@@ -1,0 +1,5 @@
+set ms_dir /madgraph/Experiments_15/madspin_results
+set spinmode none
+import /madgraph/Experiments_23/lhe_files/ggzh2/mh2_50_mh3_100/ggzh2_mh2_50_mh3_100.lhe
+decay h2 > b b~
+launch

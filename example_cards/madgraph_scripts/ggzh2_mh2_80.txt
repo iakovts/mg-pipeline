@@ -1,0 +1,23 @@
+import model Pseudoscalar_2HDMI-aligned
+generate g g > z h2 [noborn=QCD]
+output ggzh2_mh2_80
+launch -n mh3_150
+set gpxd 0
+set tanbeta 5
+set lam3 6
+set lap1 0
+set lap2 0
+set sinp 0
+set mh2 50
+set mh3 150
+set mhc 120
+set mh4 10000
+set decay 35 auto
+set decay 36 auto
+set decay 37 auto
+launch -n mh3_180
+set mh3 180
+launch -n mh3_200
+set mh3 200
+
+
