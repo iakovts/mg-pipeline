@@ -13,9 +13,13 @@ cores and can be resumed.
 
 ```mermaid
 flowchart LR
-    A[MadGraph5_aMC@NLO<br/>hard process] --> B[MadSpin<br/>decays]
-    B --> C[Pythia 8<br/>shower &amp; hadronisation]
-    C --> D[Rivet<br/>analysis]
+    A["MadGraph5_aMC@NLO"] --> B["MadSpin"]
+    B --> C["Pythia 8"]
+    C --> D["Rivet"]
+    A -.-> A1["hard process"]
+    B -.-> B1["decays"]
+    C -.-> C1["shower & hadronisation"]
+    D -.-> D1["analysis"]
 ```
 
 ## Pipeline at a glance
