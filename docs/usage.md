@@ -1,4 +1,4 @@
-# Usage
+## Usage
 
 Run the pipeline script directly:
 

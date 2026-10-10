@@ -2,6 +2,8 @@
 
 # mg-pipeline
 
+## Overview
+
 `mg-pipeline` is a Python orchestration tool that runs a
 **MadGraph5_aMC@NLO → MadSpin → Pythia 8 → Rivet** pipeline automatically,
 driven by simple config cards.
@@ -31,13 +33,7 @@ flowchart LR
 | `pythia` | Pythia 8 | Parton shower, hadronisation and decays, produces HepMC files |
 | `rivet` | Rivet | Runs the analysis over HepMC files, produces YODA histograms |
 
-## Where to next
-
-- [Prerequisites](docs/prerequisites.md) — what you need installed, and the expected layout
-- [Usage](docs/usage.md) — running the pipeline, subsets of stages, and resume mode
-- [Disclaimer, citing and license](docs/disclaimer.md)
-
-# Prerequisites
+## Prerequisites
 
 No additional Python packages are required to run this script. It has been
 developed on Python 3.13 but should run with previous versions (>3.10).
@@ -59,14 +55,14 @@ ProjectRoot/
 
 The script can work without providing the exact versions of the above programs
 and will automatically detect them at runtime. You can specify your own
-directories using flags — see [Usage](docs/usage.md).
+directories using flags (see Usage below).
 
 > **Note:** An example of the cards that can be used with this script can be
 > found under the `example_cards` directory in this repository. Essentially they
 > are simple txt files that are readily used by MadGraph/MadSpin anyway. You can
 > have multiple different cards that can be executed in a single run.
 
-# Usage
+## Usage
 
 Run the pipeline script directly:
 
@@ -120,9 +116,9 @@ Since this is a proper Python project, you can also install it in editable mode:
 pip install -e .
 ```
 
-# Disclaimer, citing and license
+## Disclaimer, citing and license
 
-## Disclaimer
+### Disclaimer
 
 `mg-pipeline` is an independent wrapper/orchestration tool. It is **not** part
 of, affiliated with, endorsed by, or supported by the developers of the software
@@ -139,11 +135,11 @@ modify, redistribute or replace them. Please install them from their official
 sources, respect their licenses, and report problems with the tools themselves
 to their own bug trackers. Issues with the wrapper belong in this repository.
 
-## Citing
+### Citing
 
 If you use this tool in academic work, please cite the underlying tools as
 requested by their authors (see links above), in addition to this repository.
 
-## License
+### License
 
 GNU GPL v3.0 or later — see [LICENSE](https://github.com/iakovts/mg-pipeline/blob/main/LICENSE).

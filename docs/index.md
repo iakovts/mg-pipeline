@@ -1,4 +1,4 @@
-# mg-pipeline
+## Overview
 
 `mg-pipeline` is a Python orchestration tool that runs a
 **MadGraph5_aMC@NLO → MadSpin → Pythia 8 → Rivet** pipeline automatically,
@@ -28,9 +28,3 @@ flowchart LR
 | `madspin` | MadSpin | Decays intermediate resonances, produces decayed LHE files |
 | `pythia` | Pythia 8 | Parton shower, hadronisation and decays, produces HepMC files |
 | `rivet` | Rivet | Runs the analysis over HepMC files, produces YODA histograms |
-
-## Where to next
-
-- [Prerequisites](prerequisites.md) — what you need installed, and the expected layout
-- [Usage](usage.md) — running the pipeline, subsets of stages, and resume mode
-- [Disclaimer, citing and license](disclaimer.md)

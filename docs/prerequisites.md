@@ -1,4 +1,4 @@
-# Prerequisites
+## Prerequisites
 
 No additional Python packages are required to run this script. It has been
 developed on Python 3.13 but should run with previous versions (>3.10).
@@ -20,7 +20,7 @@ ProjectRoot/
 
 The script can work without providing the exact versions of the above programs
 and will automatically detect them at runtime. You can specify your own
-directories using flags — see [Usage](usage.md).
+directories using flags (see Usage below).
 
 > **Note:** An example of the cards that can be used with this script can be
 > found under the `example_cards` directory in this repository. Essentially they
