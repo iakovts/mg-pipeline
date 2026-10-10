@@ -1,12 +1,26 @@
-<!-- Generated from docs/ by scripts/build_readme.py — do not edit directly. -->
-
 # mg-pipeline
-
-## Overview
 
 `mg-pipeline` is a Python orchestration tool that runs a
 **MadGraph5_aMC@NLO → MadSpin → Pythia 8 → Rivet** pipeline automatically,
 driven by simple config cards.
+
+## Contents
+
+- [Overview](#overview)
+- [Pipeline at a glance](#pipeline-at-a-glance)
+- [Prerequisites](#prerequisites)
+- [Usage](#usage)
+  - [Running only some stages (recommended)](#running-only-some-stages-recommended)
+  - [Resume mode](#resume-mode)
+  - [Installation (optional)](#installation-optional)
+- [Disclaimer, citing and license](#disclaimer-citing-and-license)
+
+<!-- The --8<-- markers bracket sections that the documentation site includes
+     (see mcgen-pipeline-docs). They are HTML comments: invisible on GitHub.
+     Keep them if you edit this file, or the site build will miss content. -->
+
+<!-- --8<-- [start:guide-head] -->
+## Overview
 
 It removes the manual bookkeeping of chaining the four tools together: each
 stage's outputs are located and fed to the next stage for you, several cards
@@ -34,7 +48,9 @@ flowchart LR
 | `rivet` | Rivet | Runs the analysis over HepMC files, produces YODA histograms |
 
 ## Prerequisites
+<!-- --8<-- [end:guide-head] -->
 
+<!-- --8<-- [start:prerequisites] -->
 No additional Python packages are required to run this script. It has been
 developed on Python 3.13 but should run with previous versions (>3.10).
 
@@ -55,13 +71,15 @@ ProjectRoot/
 
 The script can work without providing the exact versions of the above programs
 and will automatically detect them at runtime. You can specify your own
-directories using flags (see Usage below).
+directories using flags — see [Usage](#usage).
 
 > **Note:** An example of the cards that can be used with this script can be
 > found under the `example_cards` directory in this repository. Essentially they
 > are simple txt files that are readily used by MadGraph/MadSpin anyway. You can
 > have multiple different cards that can be executed in a single run.
+<!-- --8<-- [end:prerequisites] -->
 
+<!-- --8<-- [start:guide-tail] -->
 ## Usage
 
 Run the pipeline script directly:
@@ -82,7 +100,7 @@ For example, to run in quiet mode:
 python run.py -q
 ```
 
-## Running only some stages (recommended)
+### Running only some stages (recommended)
 
 You can run just a subset of the pipeline stages without having to interrupt
 the run manually.
@@ -99,7 +117,7 @@ python run.py --stages madgraph,madspin
 python run.py --resume --intermediate-dir /path/to/Experiments_23 --stages rivet
 ```
 
-## Resume mode
+### Resume mode
 
 Resume mode is explicit:
 
@@ -108,7 +126,7 @@ Resume mode is explicit:
 - With `--resume`, `--intermediate-dir` must point to an existing experiment
   directory and will be re-used.
 
-## Installation (optional)
+### Installation (optional)
 
 Since this is a proper Python project, you can also install it in editable mode:
 
@@ -138,8 +156,9 @@ to their own bug trackers. Issues with the wrapper belong in this repository.
 ### Citing
 
 If you use this tool in academic work, please cite the underlying tools as
-requested by their authors (see links above), in addition to this repository.
+requested by their authors (see links above).
 
 ### License
 
-GNU GPL v3.0 or later — see [LICENSE](https://github.com/iakovts/mg-pipeline/blob/main/LICENSE).
+GNU GPL v3.0 or later — see [LICENSE](LICENSE).
+<!-- --8<-- [end:guide-tail] -->
