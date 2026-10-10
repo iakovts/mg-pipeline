@@ -1,14 +1,46 @@
+<!-- Generated from docs/ by scripts/build_readme.py — do not edit directly. -->
+
 # mg-pipeline
-Run a madgraph->madspin->pythia->rivet pipeline automatically based on
-some config cards.
 
-## Prerequisites
-No additional packages are required to run this script. Has been developed on python 3.13 but should run with previous versions (>3.10?).
+`mg-pipeline` is a Python orchestration tool that runs a
+**MadGraph5_aMC@NLO → MadSpin → Pythia 8 → Rivet** pipeline automatically,
+driven by simple config cards.
 
-To run this script you need a usable MadGraph5_aMC@NLO installation with MadSpin, Pythia8 and Rivet properly configured.
-The script should be run from the same directory as the root directories of the above programs.
+It removes the manual bookkeeping of chaining the four tools together: each
+stage's outputs are located and fed to the next stage for you, several cards
+can be run in a single invocation, and runs are parallelised across available
+cores and can be resumed.
 
-i.e.
+```mermaid
+flowchart LR
+    A[MadGraph5_aMC@NLO<br/>hard process] --> B[MadSpin<br/>decays]
+    B --> C[Pythia 8<br/>shower &amp; hadronisation]
+    C --> D[Rivet<br/>analysis]
+```
+
+## Pipeline at a glance
+
+| Stage | Tool | Summary |
+|-------|------|---------|
+| `madgraph` | MadGraph5_aMC@NLO | Generates the hard process, produces LHE files |
+| `madspin` | MadSpin | Decays intermediate resonances, produces decayed LHE files |
+| `pythia` | Pythia 8 | Parton shower, hadronisation and decays, produces HepMC files |
+| `rivet` | Rivet | Runs the analysis over HepMC files, produces YODA histograms |
+
+## Where to next
+
+- [Prerequisites](docs/prerequisites.md) — what you need installed, and the expected layout
+- [Usage](docs/usage.md) — running the pipeline, subsets of stages, and resume mode
+- [Disclaimer, citing and license](docs/disclaimer.md)
+
+# Prerequisites
+
+No additional Python packages are required to run this script. It has been
+developed on Python 3.13 but should run with previous versions (>3.10).
+
+To run this script you need a usable **MadGraph5_aMC@NLO** installation with
+**MadSpin**, **Pythia 8** and **Rivet** properly configured. The script should
+be run from the same directory as the root directories of the above programs:
 
 ```
 ProjectRoot/
@@ -21,30 +53,39 @@ ProjectRoot/
 └── mg_pipeline/run_script.py
 ```
 
-The script can work without providing the exact versions of the above programs and will automatically detect them at runtime. You can specify your own directories using flags. 
+The script can work without providing the exact versions of the above programs
+and will automatically detect them at runtime. You can specify your own
+directories using flags — see [Usage](docs/usage.md).
 
-> **Note:** An example of the cards that can be used with this script can be found under the `example_cards` dir in this repo. Essentially they are simple txt files that are readily used by MadGraph/Madspin anyway. You can have multiple different cards that can be executed in a single run.
+> **Note:** An example of the cards that can be used with this script can be
+> found under the `example_cards` directory in this repository. Essentially they
+> are simple txt files that are readily used by MadGraph/MadSpin anyway. You can
+> have multiple different cards that can be executed in a single run.
 
-## Usage
+# Usage
 
 Run the pipeline script directly:
+
 ```bash
 python run.py
 ```
 
 Add the `--help` flag to see all available options:
+
 ```bash
 python run.py --help
 ```
 
 For example, to run in quiet mode:
+
 ```bash
 python run.py -q
 ```
 
-### Running only some stages (recommended)
+## Running only some stages (recommended)
 
-You can run just a subset of the pipeline stages without having to interrupt the run manually.
+You can run just a subset of the pipeline stages without having to interrupt
+the run manually.
 
 Valid stages are: `madgraph`, `madspin`, `pythia`, `rivet`.
 
@@ -58,34 +99,41 @@ python run.py --stages madgraph,madspin
 python run.py --resume --intermediate-dir /path/to/Experiments_23 --stages rivet
 ```
 
-### Resume mode
+## Resume mode
 
 Resume mode is explicit:
 
-- Without `--resume`, a new experiment folder is created (e.g. `Experiments`, `Experiments_2`, ...).
-- With `--resume`, `--intermediate-dir` must point to an existing experiment directory and will be re-used.
+- Without `--resume`, a new experiment folder is created (e.g. `Experiments`,
+  `Experiments_2`, ...).
+- With `--resume`, `--intermediate-dir` must point to an existing experiment
+  directory and will be re-used.
 
-### Installation (Optional)
+## Installation (optional)
+
 Since this is a proper Python project, you can also install it in editable mode:
+
 ```bash
 pip install -e .
 ```
 
+# Disclaimer, citing and license
+
 ## Disclaimer
 
-`mg-pipeline` is an independent wrapper/orchestration tool. It is **not** part of,
-affiliated with, endorsed by, or supported by the developers of the software it
-drives. In particular, this project wraps:
+`mg-pipeline` is an independent wrapper/orchestration tool. It is **not** part
+of, affiliated with, endorsed by, or supported by the developers of the software
+it drives. In particular, this project wraps:
 
-- [MadGraph5_aMC@NLO](https://launchpad.net/mg5amcnlo) — event generation (MadSpin
-  is distributed as part of it; see [arXiv:1307.1694](https://arxiv.org/abs/1307.1694))
+- [MadGraph5_aMC@NLO](https://launchpad.net/mg5amcnlo) — event generation
+  (MadSpin is distributed as part of it; see
+  [arXiv:1307.1694](https://arxiv.org/abs/1307.1694))
 - [PYTHIA](https://pythia.org/) — parton shower, hadronization and decays
 - [Rivet](https://rivet.hepforge.org/) — analyses and histogramming
 
 This tool only automates running the above programs with your cards; it does not
 modify, redistribute or replace them. Please install them from their official
-sources, respect their licenses, and report problems with the tools themselves to
-their own bug trackers. Issues with the wrapper belong in this repository.
+sources, respect their licenses, and report problems with the tools themselves
+to their own bug trackers. Issues with the wrapper belong in this repository.
 
 ## Citing
 
@@ -94,4 +142,4 @@ requested by their authors (see links above), in addition to this repository.
 
 ## License
 
-GNU GPL v3.0 or later — see [LICENSE](LICENSE).
+GNU GPL v3.0 or later — see [LICENSE](https://github.com/iakovts/mg-pipeline/blob/main/LICENSE).
